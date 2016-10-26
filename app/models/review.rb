@@ -1,7 +1,9 @@
 class Review < ApplicationRecord
   include PublicActivity::Model
   tracked only: :create,
-    owner: ->controller, model{controller && controller.current_user}
+    owner: ->controller, model{controller && controller.current_user},
+    recipient: ->controller, model{model && model.user}
+
   acts_as_votable
   
   belongs_to :location

@@ -1,9 +1,10 @@
 <li>
   <% if a.trackable %>
-    <%= render "shared/activity_owner", a: a %> liked a review in
+    <%= render "shared/activity_owner", a: a %> liked
+    <%= a.recipient.name %>'s review in
     <%= link_to a.trackable.location.name, admin_location_path(a.trackable) %>
     <%= time_ago_in_words activity.created_at %> <%= t :ago %>
   <% else %>
-    An user has disliked
+    A review had been deleted
   <% end %>
 </li>

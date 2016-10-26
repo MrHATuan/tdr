@@ -11,60 +11,114 @@
       <nav>
           <div id="icon_menu" class="hidden-lg hidden-md"></div>
           <div id="menu">
-              <ul class="mainmenu">
-                <% if user_signed_in? && current_user.admin? %>
-                  <li><%= link_to "Categories", admin_categories_path %></li>
-                  <li class="has-child">
-                    <a href="#">Locations</a>
-                    <ul class="child">
-                      <li><%= link_to "All Locations", admin_locations_path %></li>
-                      <li><%= link_to "New Location", new_admin_location_path %></li>
+            <ul class="mainmenu">
+              <% if user_signed_in? && current_user.admin? %>
+                <li>
+                  <div class="dropdown">
+                    <a id="dLabel" role="button"
+                      data-toggle="dropdown" data-target="#" href="/page.html">
+                      <i class="glyphicon glyphicon-bell"></i>
+                    </a>                    
+                    <ul class="dropdown-menu notifications"
+                      role="menu" aria-labelledby="dLabel">                      
+                      <div class="notification-heading">
+                        <h4 class="menu-title">Notifications</h4>
+                        <h4 class="menu-title pull-right">View all
+                          <i class="glyphicon glyphicon-circle-arrow-right"></i>
+                        </h4>
+                      </div>
+                      <li class="divider"></li>
+                      <div class="notifications-wrapper">
+                        <a class="content" href="#">                       
+                          <div class="notification-item">
+                            <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
+                            <p class="item-info">Marketing 101, Video Assignment</p>
+                          </div>                         
+                        </a>
+                        <a class="content" href="#">
+                          <div class="notification-item">
+                            <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
+                            <p class="item-info">Marketing 101, Video Assignment</p>
+                          </div>
+                        </a>
+                      </div>
+                      <li class="divider"></li>
+                      <div class="notification-footer">
+                        <%= link_to locations_path, id: "all-noti" do %>
+                          <h4 class="menu-title">View all
+                            <i class="glyphicon glyphicon-circle-arrow-right">
+                            </i>
+                          </h4>
+                        <% end %>
+                      </div>
                     </ul>
-                  </li>
-                  <li><%= link_to "All Users", admin_users_path %></li>
-                  <li class="has-child">
-                    <a href="#">
-                      <%= t "account" %> <b class="caret"></b>
-                    </a>
-                    <ul class="child">
-                      <li><%= link_to "Profile", admin_user_path(current_user) %></li>
-                      <li><%= link_to "Edit", edit_user_registration_path %></li>
-                    </ul>
-                  </li>
-                  <li class="lt-child">
-                    <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-danger" do %>
-                      <i class="fa fa-sign-out" aria-hidden="true"></i>Logout
-                    <% end %>
-                  </li>
+                  </div>
+                </li>
+                <li><%= link_to "Categories", admin_categories_path %></li>
+                <li class="has-child">
+                  <a href="#">Locations</a>
+                  <ul class="child">
+                    <li>
+                      <%= link_to "All Locations", admin_locations_path %>
+                    </li>
+                    <li>
+                      <%= link_to "New Location", new_admin_location_path %>
+                    </li>
+                  </ul>
+                </li>
+                <li><%= link_to "All Users", admin_users_path %></li>
+                <li class="has-child">
+                  <a href="#">
+                    <%= t "account" %> <b class="caret"></b>
+                  </a>
+                  <ul class="child">
+                    <li>
+                      <%= link_to "Profile", admin_user_path(current_user) %>
+                    </li>
+                    <li>
+                      <%= link_to "Edit", edit_user_registration_path %>
+                    </li>
+                  </ul>
+                </li>
+                <li class="lt-child">
+                  <%= link_to destroy_user_session_path, method: :delete,
+                    class: "btn btn-danger" do %>
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>Logout
+                  <% end %>
+                </li>
 
-                  <% elsif user_signed_in? %>
-                  <li><%= link_to "All Locations", locations_path %></li>
-                  <li class="has-child">
-                    <a href="#">
-                      <%= t "account" %> <b class="caret"></b>
-                    </a>
-                    <ul class="child">
-                      <li><%= link_to "Profile", "#" %></li>
-                      <li><%= link_to "Edit", edit_user_registration_path %></li>
-                    </ul>
-                  </li>
-                  <li class="lt-child">
-                    <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-danger" do %>
-                      <i class="fa fa-sign-out" aria-hidden="true"></i>Logout
-                    <% end %>
-                  </li>
-                <% else %>
-                  <li class="lt-child">
-                    <%= link_to new_user_session_path do %>
-                      <i class="fa fa-sign-in" aria-hidden="true"></i>Login
-                    <% end %>
-                    <%= link_to "Signup", new_user_registration_path, class: "btn btn-info" %>
+              <% elsif user_signed_in? %>
+                <li><%= link_to "All Locations", locations_path %></li>
+                <li class="has-child">
+                  <a href="#">
+                    <%= t "account" %> <b class="caret"></b>
+                  </a>
+                  <ul class="child">
+                    <li><%= link_to "Profile", user_path(current_user) %></li>
+                    <li>
+                      <%= link_to "Edit", edit_user_registration_path %>
+                    </li>
+                  </ul>
+                </li>
+                <li class="lt-child">
+                  <%= link_to destroy_user_session_path, method: :delete,
+                    class: "btn btn-danger" do %>
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>Logout
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="lt-child">
+                  <%= link_to new_user_session_path do %>
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>Login
+                  <% end %>
+                  <%= link_to "Signup", new_user_registration_path,
+                    class: "btn btn-info" %>
 
-                  <!--  <a class="btn btn-primary" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();"> Login</a>-->
-		                <!--<a class="btn btn-primary" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();"> Sigup</a>-->
-                  </li>
-                <% end %>
-              </ul>
+                <!--  <a class="btn btn-primary" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();"> Login</a>-->
+	                <!--<a class="btn btn-primary" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();"> Sigup</a>-->
+                </li>
+              <% end %>
+            </ul>
           </div>
       </nav>
     </div>
