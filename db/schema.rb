@@ -76,6 +76,9 @@ ActiveRecord::Schema.define(version: 20161024125039) do
     t.float    "rating",       default: 0.0
     t.integer  "category_id"
     t.string   "picture"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.index ["category_id"], name: "index_locations_on_category_id"

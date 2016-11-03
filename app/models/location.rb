@@ -11,6 +11,9 @@ class Location < ApplicationRecord
 
   mount_uploader :picture, PictureUploader
 
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
+
   validates :name, length: {maximum: 150}, presence: true
   validates :category_id, presence: false
   validates :rating, presence: true,format: {with: /\A\d+(?:.\d{0,2})?\z/},

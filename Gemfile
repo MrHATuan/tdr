@@ -29,6 +29,7 @@ gem "faker"
 gem 'jquery-turbolinks'
 gem "like_dislike"
 gem "public_activity"
+gem "geocoder"
 
 group :development, :test do
   gem 'byebug', platform: :mri
